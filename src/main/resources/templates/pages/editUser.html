@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="flex justify-center items-center">
+    <div
+      class="w-full max-w-md bg-white rounded-lg border border-gray-200 dark:bg-gray-800"
+    >
+      <div class="px-6 py-8 text-center">
+        <h2 class="text-2xl font-semibold text-gray-700 dark:text-white fo">
+          Editar usuario <span th:text="${user.firstName}"></span>
+        </h2>
+
+        <form th:action="@{/users/update}" th:object="${user}" method="post">
+          <div class="mt-4">
+            <input hidden th:field="*{id}" />
+            <label for="firstName" class="block text-left my-2 font-semibold"
+              >Nombres</label
+            >
+            <input
+              class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+              type="text"
+              id="firstName"
+              name="firstName"
+              th:field="*{firstName}"
+              placeholder="Luis"
+            />
+            <p
+              th:if="${#fields.hasErrors('firstName')}"
+              th:errors="*{firstName}"
+              class="block text-xs text-left text-red-500"
+            >
+              Incorrect Email
+            </p>
+            <label for="lastName" class="block text-left my-2 font-semibold"
+              >Apellidos</label
+            >
+            <input
+              class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+              type="text"
+              id="lastName"
+              name="lastName"
+              th:field="*{lastName}"
+              placeholder="Bravo"
+            />
+            <p
+              th:if="${#fields.hasErrors('lastName')}"
+              th:errors="*{lastName}"
+              class="block text-xs text-left text-red-500"
+            >
+              Incorrect Email
+            </p>
+            <label for="email" class="block text-left my-2 font-semibold"
+              >Correo electrónico</label
+            >
+            <input
+              class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+              type="text"
+              id="email"
+              name="email"
+              th:field="*{email}"
+              placeholder="someone@email.com"
+            />
+            <p
+              th:if="${#fields.hasErrors('email')}"
+              th:errors="*{email}"
+              class="block text-xs text-left text-red-500"
+            >
+              Incorrect Email
+            </p>
+            <input th:field="*{password}" hidden />
+            <label for="role" class="block text-left my-2 font-semibold"
+              >Rol de usuario</label
+            >
+            <select
+            id="role"
+            name="role"
+              th:field="*{role}"
+              class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+            >
+              <option value="ROLE_ADMIN">Administrador</option>
+              <option value="ROLE_USER">Usuario</option>
+            </select>
+          </div>
+
+          <div class="flex items-center justify-between mt-4">
+            <button
+              type="submit"
+              class="px-6 py-2 font-medium text-white transition-colors duration-300 transform bg-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-800 dark:focus:bg-gray-700"
+            >
+              Actualizar
+            </button>
+            <a
+              href="/users/admin"
+              class="px-6 py-2 font-medium text-white transition-colors duration-300 transform bg-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-800 dark:focus:bg-gray-700"
+            >
+              Cancelar
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
