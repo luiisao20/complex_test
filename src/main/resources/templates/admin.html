@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <body class="flex justify-center items-center">
+      <div class="w-full max-w-md bg-white rounded-lg dark:bg-gray-800">
+        <div class="px-6 py-8 text-center">
+          <h2
+            th:text="${edit} ? 'Editar Doctor' : 'Crear Doctor'"
+            class="text-2xl font-semibold text-gray-700 dark:text-white fo"
+          >
+            Crear Doctor
+          </h2>
+
+          <form
+            th:action="${edit} ? @{/doctors/update} : @{/doctors/save}"
+            th:object="${doctor}"
+            method="post"
+          >
+            <div class="mt-4">
+              <input hidden th:field="*{id}" />
+              <label for="degree">Título</label>
+              <input
+                class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+                th:field="*{degree}"
+                type="text"
+                id="degree"
+                name="degree"
+                placeholder="Ej. Cardiólogo"
+              />
+              <label for="email">Correo electrónico</label>
+              <input
+                class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+                th:field="*{email}"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="name@company.com"
+              />
+              <label for="firstName">Nombres</label>
+              <input
+                class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+                th:field="*{firstName}"
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="Luis"
+              />
+              <label for="lastName">Apellidos</label>
+              <input
+                class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+                th:field="*{lastName}"
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="Bravo"
+              />
+              <label for="gender">Género</label>
+              <select
+                id="gender"
+                name="gender"
+                th:field="*{gender}"
+                class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+              >
+                <option selected disabled value="0">Escoge una opción</option>
+                <option value="GENDER_MALE">Masculino</option>
+                <option value="GENDER_FEMALE">Femenino</option>
+                <option value="GENDER_OTHER">Prefiero no decirlo</option>
+              </select>
+            </div>
+
+            <div class="flex items-center justify-between mt-4">
+              <button
+                type="submit"
+                class="px-6 py-2 font-medium text-white transition-colors duration-300 transform bg-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-800 dark:focus:bg-gray-700"
+              >
+                Continuar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </body>
+  </body>
+</html>

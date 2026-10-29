@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div class="flex flex-row justify-between">
+      <h2>Listado de doctores</h2>
+      <a
+        class="p-4 rounded-xl text-white bg-blue-500 hover:opacity-80"
+        th:href="@{/admin}"
+        >Crear nuevo doctor</a
+      >
+    </div>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y-2 divide-gray-200">
+        <thead class="ltr:text-left rtl:text-right">
+          <tr class="*:font-medium *:text-gray-900">
+            <th class="px-3 py-2 whitespace-nowrap">Nombre</th>
+            <th class="px-3 py-2 whitespace-nowrap">Apellido</th>
+            <th class="px-3 py-2 whitespace-nowrap">Correo</th>
+            <th class="px-3 py-2 whitespace-nowrap">Titulo</th>
+            <th class="px-3 py-2 whitespace-nowrap">Género</th>
+            <th class="px-3 py-2 whitespace-nowrap">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-gray-200">
+          <tr
+            th:each="doctor : ${doctors}"
+            class="*:text-gray-900 *:first:font-medium"
+          >
+            <td
+              th:text="${doctor.firstName}"
+              class="px-3 py-2 whitespace-nowrap"
+            >
+              Nandor the Relentless
+            </td>
+            <td
+              th:text="${doctor.lastName}"
+              class="px-3 py-2 whitespace-nowrap"
+            >
+              04/06/1262
+            </td>
+            <td th:text="${doctor.email}" class="px-3 py-2 whitespace-nowrap">
+              Vampire Warrior
+            </td>
+            <td th:text="${doctor.degree}" class="px-3 py-2 whitespace-nowrap">
+              $0
+            </td>
+            <td th:text="${doctor.gender}" class="px-3 py-2 whitespace-nowrap">
+              $0
+            </td>
+            <td class="px-3 py-2 flex flex-row gap-4">
+              <form
+                method="post"
+                th:action="@{/doctors/delete/{id}(id=${doctor.id})}"
+              >
+                <button
+                  type="submit"
+                  onclick="
+                    return confirm('¿Estás seguro de eliminar el registro?');
+                  "
+                  class="cursor-pointer hover:underline hover:underline-offset-2 text-red-500"
+                >
+                  Eliminar
+                </button>
+              </form>
+              <a
+                class="cursor-pointer hover:underline hover:underline-offset-2 text-blue-500"
+                th:href="@{/doctors/edit/{id}(id=${doctor.id})}"
+              >Editar</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
